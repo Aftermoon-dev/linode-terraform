@@ -10,6 +10,9 @@ resource "linode_instance" "server" {
     purpose   = "vpc"
     subnet_id = linode_vpc_subnet.private_subnet[0].id
     primary = true
+    ipv4 {
+      nat_1_1 = "any"
+    }
   }
 
   tags       = [var.project, var.environment]
@@ -27,6 +30,9 @@ resource "linode_instance" "database" {
       purpose   = "vpc"
       subnet_id = linode_vpc_subnet.private_subnet[1].id
       primary = true
+      ipv4 {
+        nat_1_1 = "any"
+      }
     }
 
     stackscript_id = 607026
