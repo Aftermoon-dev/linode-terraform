@@ -35,13 +35,11 @@ resource "linode_instance" "database" {
       }
     }
 
-    stackscript_id = 607026
+    stackscript_id = linode_stackscript.mysql_server.id
     stackscript_data = {
-        "database" = "MySQL"
-        "database_name" = var.db_default_schema
-        "dbroot_password" = var.db_root_password
-        "dbuser" = var.db_user_id
-        "dbuser_password" = var.db_user_password
+        "root_password" = var.db_root_password
+        "timezone" = "Asia/Seoul"
+        "root_allowed_ip" = "10.%"
     }
 
     tags       = [var.project, var.environment]

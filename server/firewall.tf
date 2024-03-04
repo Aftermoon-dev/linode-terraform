@@ -31,7 +31,6 @@ resource "linode_firewall" "database_firewall" {
     label    = "allow-private-subnet"
     action   = "ACCEPT"
     protocol = "TCP"
-    ports    = "3306"
     ipv4 = var.private_subnet_cidr
   }
 
@@ -39,7 +38,6 @@ resource "linode_firewall" "database_firewall" {
     label    = "allow-public-subnet"
     action   = "ACCEPT"
     protocol = "TCP"
-    ports    = "3306"
     ipv4 = var.public_subnet_cidr
   }
 
