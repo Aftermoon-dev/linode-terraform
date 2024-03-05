@@ -61,3 +61,8 @@ variable "private_subnet_cidr" {
     "10.2.4.0/24"
   ]
 }
+
+variable "server_root_pass" {
+  description = "Server Root Password"
+  type        = string
+}

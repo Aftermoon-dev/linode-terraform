@@ -4,16 +4,25 @@ resource "linode_instance" "server" {
   region          = var.region
   type            = "g6-nanode-1"
   authorized_keys = [linode_sshkey.server_key.ssh_key]
+  root_pass = var.server_root_pass
   firewall_id     = linode_firewall.server_firewall.id
   
   interface {
+    purpose = "public"
+    primary = true
+  }
+
+  interface {
     purpose   = "vpc"
     subnet_id = linode_vpc_subnet.private_subnet[0].id
-    primary = true
-    ipv4 {
-      nat_1_1 = "any"
-    }
   }
+
+  stackscript_id = linode_stackscript.cicd_server.id
+  stackscript_data = {
+    "github_runner_token": ""
+    "github_repo_url": "https://github.com/Aftermoon-dev/linode-cicd-spring-boot-java"
+  }
+  private_ip = true
 
   tags       = [var.project, var.environment]
   depends_on = [linode_vpc_subnet.private_subnet, linode_sshkey.server_key, linode_firewall.server_firewall]
