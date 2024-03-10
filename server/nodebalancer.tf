@@ -1,5 +1,5 @@
 resource "linode_nodebalancer" "server_nb" {
-    label  = "${var.environment}-${var.project}-server-nb"
+    label  = "${var.environment}-${var.project}-server-nodesdsd"
     region = var.region
 }
 
@@ -20,11 +20,12 @@ resource "linode_nodebalancer_node" "server_nb_node_http" {
     nodebalancer_id = linode_nodebalancer.server_nb.id
     config_id       = linode_nodebalancer_config.http-nb-config.id
     address         = "${linode_instance.server.private_ip_address}:8080"
-    label           = "${var.environment}-${var.project}-node"
+    label           = "${var.environment}-${var.project}-nodafdafdfdddfdadffdafadfdaedsdafdfdfdafdasf"
     weight          = "100"
     mode = "accept"
 
     lifecycle {
         replace_triggered_by = [linode_instance.server.id]
     }
+    depends_on = [ linode_nodebalancer_config.http-nb-config ]
 }
