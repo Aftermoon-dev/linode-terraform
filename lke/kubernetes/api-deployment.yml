@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: api
+  template:
+    metadata:
+      labels:
+        type: api
+    spec:
+      containers:
+      - name: spring-boot-api
+        image: aftermoon/kube-test-spring-boot:latest
+        ports:
+        - containerPort: 8080

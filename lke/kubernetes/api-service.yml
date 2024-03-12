@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-api
+spec:
+  ports:
+    - name: "tomcat"
+      port: 8080
+      targetPort: 8080
+  selector:
+    type: api
