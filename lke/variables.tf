@@ -17,3 +17,9 @@ variable "region" {
   description = "Infra Region"
   type        = string
 }
+
+variable "kube_config_filepath" {
+  description = "Kubernetes kubeconfig File Path"
+  type = string
+  default = "./config"
+}
